@@ -1,7 +1,21 @@
 {
   "name": "community-cordova-plugin-flashlight",
-  "version": "3.3.2",
-  "description": "This plugin allows you switch the Flashlight / Torch of your device on or off.",
+  "version": "3.5.0",
+  "description": "Switch the flashlight / torch on or off, set its brightness (Android 13+ strength levels, iOS torch level) and listen to torch state changes.",
+  "types": "./types/index.d.ts",
+  "files": [
+    "www/",
+    "src/",
+    "hooks/",
+    "types/",
+    "plugin.xml",
+    "README.md",
+    "RELEASENOTES.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node --test test/*.test.js"
+  },
   "cordova": {
     "id": "community-cordova-plugin-flashlight",
     "platforms": [
@@ -10,8 +24,11 @@
       "wp8"
     ]
   },
-  "repository": "EYALIN/community-cordova-plugin-flashlight/tree/master",
-  "homepage": "https://github.com/EYALIN/community-cordova-plugin-flashlight/tree/master",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EYALIN/community-cordova-plugin-flashlight.git"
+  },
+  "homepage": "https://github.com/EYALIN/community-cordova-plugin-flashlight#readme",
   "funding": "https://github.com/sponsors/EYALIN",
   "keywords": [
     "Torch",
@@ -21,7 +38,11 @@
     "ecosystem:cordova",
     "cordova-ios",
     "cordova-android",
-    "cordova-wp8"
+    "cordova-wp8",
+    "torch-strength",
+    "brightness",
+    "quick-settings-tile",
+    "foreground-service"
   ],
   "engines": [
     {

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- community-cordova-plugin-flashlight: labels for the opt-in tile / notification.
+     An app can translate them by adding the same names under res/values-<lang>/. -->
+<resources>
+    <string name="flashlight_tile_label">Flashlight</string>
+    <string name="flashlight_sos_tile_label">SOS</string>
+    <string name="flashlight_notification_channel">Flashlight</string>
+    <string name="flashlight_notification_title">Flashlight is on</string>
+    <string name="flashlight_notification_off">Turn off</string>
+</resources>

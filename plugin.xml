@@ -2,27 +2,37 @@
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
         xmlns:android="http://schemas.android.com/apk/res/android"
         id="community-cordova-plugin-flashlight"
-        version="3.2.0">
+        version="3.5.0">
 
   <name>Flashlight</name>
 
   <description>
-    This plugin allows you switch the Flashlight / Torch of your device on or off.
+    Switch the flashlight / torch on or off, set its brightness and listen to torch state changes.
   </description>
 
   <author>Eddy Verbruggen - @EddyVerbruggen</author>
 
   <license>MIT</license>
 
-  <keywords>Torch, Flashlight, Flash, Light</keywords>
+  <keywords>Torch, Flashlight, Flash, Light, Brightness</keywords>
 
-  <repo>https://github.com/EddyVerbruggen/Flashlight-PhoneGap-Plugin.git</repo>
+  <repo>https://github.com/EYALIN/community-cordova-plugin-flashlight.git</repo>
 
-  <issue>https://github.com/EddyVerbruggen/Flashlight-PhoneGap-Plugin/issues</issue>
+  <issue>https://github.com/EYALIN/community-cordova-plugin-flashlight/issues</issue>
 
   <engines>
     <engine name="cordova" version=">=3.0.0"/>
   </engines>
+
+  <!--
+    Opt-in Android extras. All default to false: an app that doesn't set them gets no tile, no
+    service and no new permission. hooks/android-manifest.js adds / removes the manifest entries
+    from these values on every prepare (a <config-file> can't depend on a variable).
+    Set them with the variable flag of "cordova plugin add", e.g. ENABLE_QS_TILE=true (see README).
+  -->
+  <preference name="ENABLE_QS_TILE" default="false"/>
+  <preference name="ENABLE_SOS_TILE" default="false"/>
+  <preference name="ENABLE_TORCH_SERVICE" default="false"/>
 
   <js-module src="www/Flashlight.js" name="Flashlight">
     <clobbers target="window.plugins.flashlight" />
@@ -39,6 +49,8 @@
 
     <header-file src="src/ios/Flashlight.h"/>
     <source-file src="src/ios/Flashlight.m"/>
+
+    <framework src="AVFoundation.framework"/>
   </platform>
 
   <!-- android -->
@@ -51,6 +63,21 @@
     </config-file>
 
     <source-file src="src/android/nl/xservices/plugins/Flashlight.java" target-dir="src/nl/xservices/plugins"/>
+    <source-file src="src/android/nl/xservices/plugins/TorchCamera.java" target-dir="src/nl/xservices/plugins"/>
+    <!-- Compiled always, declared in the manifest only when their variable is true. -->
+    <source-file src="src/android/nl/xservices/plugins/TorchTileService.java" target-dir="src/nl/xservices/plugins"/>
+    <source-file src="src/android/nl/xservices/plugins/SosTileService.java" target-dir="src/nl/xservices/plugins"/>
+    <source-file src="src/android/nl/xservices/plugins/TorchForegroundService.java" target-dir="src/nl/xservices/plugins"/>
+
+    <resource-file src="src/android/res/values/flashlight_strings.xml" target="res/values/flashlight_strings.xml"/>
+    <resource-file src="src/android/res/drawable/flashlight_ic_torch.xml" target="res/drawable/flashlight_ic_torch.xml"/>
+    <resource-file src="src/android/res/drawable/flashlight_ic_sos.xml" target="res/drawable/flashlight_ic_sos.xml"/>
+    <resource-file src="src/android/res/raw/flashlight_keep.xml" target="res/raw/flashlight_keep.xml"/>
+
+    <!-- Adds the opt-in services / permissions to AndroidManifest.xml (see the preferences above). -->
+    <hook type="after_prepare" src="hooks/android-manifest.js"/>
+    <hook type="after_plugin_install" src="hooks/android-manifest.js"/>
+    <hook type="before_plugin_uninstall" src="hooks/android-manifest.js"/>
 
   </platform>
 

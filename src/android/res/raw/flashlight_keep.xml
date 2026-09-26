@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- The plugin looks these up with getIdentifier(); keep them under strict resource shrinking. -->
+<resources xmlns:tools="http://schemas.android.com/tools"
+    tools:keep="@string/flashlight_*,@drawable/flashlight_ic_*" />
